@@ -48,6 +48,6 @@ for(i in 1:nrow(data_sub)){
   }
 }
 close(fileConn1)
-file.show("sample1.txt")
+#file.show("sample1.txt")
 
 
