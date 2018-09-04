@@ -14,7 +14,8 @@ output_file =  sprintf("%s_spectr_thrsh_%f.txt", nuclide, threshhold_intensity)
 url_lara = sprintf("http://www.nucleide.org/DDEP_WG/Nuclides/%s", lara_data_file)
 all_content = readLines(url_lara)
 Head_skip = all_content[-c(1:grep("--------",all_content))]
-data_lara <- read.table(textConnection(Head_skip[-length(Head_skip)]), header = TRUE, sep = ";",quote = "")
+data_lara <- read.table(textConnection(Head_skip[-length(Head_skip)]), header = TRUE, sep = ";", quote = "")
+
 # Make a subset for a threshhold intensity (eg. > 0.9 )
 data_sub = subset(data_lara, data_lara$Intensity.... > threshhold_intensity)
 
