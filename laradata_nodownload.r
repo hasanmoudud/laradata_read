@@ -2,19 +2,19 @@ library(utils)
 #'''Read an lara text file and write an spectra file for PENELOPE''''
 
 ####..... Input data ....#####
-nuclide = "Eu-152" # nucliede "symbol-massnumber-m/D(If needed)"
-threshhold_intensity = 0.9   # Minimum intensity in pwersent % (0.90%)
+nuclide = "Eu-154" # nucliede "symbol-massnumber-m/D(If needed)"
+threshhold_intensity = 0.49   # Minimum intensity in pwersent % (0.90%)
 bin.size <- 0.0001  # Bin size of spectra   0.0001= 100 eV
 
 # Generate file name 
 lara_data_file = sprintf("%s.lara.txt", nuclide)
-output_file =  sprintf("%s_spectr.txt", nuclide)
+output_file =  sprintf("%s_spectr_thrsh_%f.txt", nuclide, threshhold_intensity)
 
 # Read lara data file 
 url_lara = sprintf("http://www.nucleide.org/DDEP_WG/Nuclides/%s", lara_data_file)
 all_content = readLines(url_lara)
 Head_skip = all_content[-c(1:grep("--------",all_content))]
-data_lara <- read.table(textConnection(Head_skip[-length(Head_skip)]), header = TRUE, sep = ";")
+data_lara <- read.table(textConnection(Head_skip[-length(Head_skip)]), header = TRUE, sep = ";",quote = "")
 # Make a subset for a threshhold intensity (eg. > 0.9 )
 data_sub = subset(data_lara, data_lara$Intensity.... > threshhold_intensity)
 
