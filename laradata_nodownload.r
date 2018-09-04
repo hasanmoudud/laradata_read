@@ -2,13 +2,13 @@ library(utils)
 #'''Read an lara text file and write an spectra file for PENELOPE''''
 
 ####..... Input data ....#####
-nuclide = "Eu-154" # nucliede "symbol-massnumber-m/D(If needed)"
+nuclide = "Eu-152" # nucliede "symbol-massnumber-m/D(If needed)"
 threshhold_intensity = 0.49   # Minimum intensity in pwersent % (0.90%)
 bin.size <- 0.0001  # Bin size of spectra   0.0001= 100 eV
 
 # Generate file name 
 lara_data_file = sprintf("%s.lara.txt", nuclide)
-output_file =  sprintf("%s_spectr_thrsh_%f.txt", nuclide, threshhold_intensity)
+output_file =  sprintf("%s_spectr_thrsh_%f_inp.txt", nuclide, threshhold_intensity)
 
 # Read lara data file 
 url_lara = sprintf("http://www.nucleide.org/DDEP_WG/Nuclides/%s", lara_data_file)
@@ -31,11 +31,14 @@ fileConn1 <- file(output_file, "w")
 
 #Write the spectra in text file .... two lines for a bin..... intensity is -1 for last line 
 for(i in 1:nrow(data_sub)){
-  write(sprintf('myfile.write ("SPECTR   \ %fe6\   \ %f\\n")', (data_sub$Energy_ev[i]*0.001), (data_sub$Intensity_frac[i]/100)), fileConn1, append=TRUE)
+  #write(sprintf('myfile.write ("SPECTR   \ %fe6\   \ %f\\n")', (data_sub$Energy_ev[i]*0.001), (data_sub$Intensity_frac[i]/100)), fileConn1, append=TRUE)
+  write(sprintf("SPECTR   \ %fe6\   \ %f", (data_sub$Energy_ev[i]*0.001), (data_sub$Intensity_frac[i]/100)), fileConn1, append=TRUE)
   if(i != nrow(data_sub)){
-    write(sprintf('myfile.write ("SPECTR   \ %fe6\   \ %f\\n")', ((data_sub$Energy_ev[i]*0.001)+bin.size), (0)), fileConn1, append=TRUE)
+    #write(sprintf('myfile.write ("SPECTR   \ %fe6\   \ %f\\n")', ((data_sub$Energy_ev[i]*0.001)+bin.size), (0)), fileConn1, append=TRUE)
+    write(sprintf("SPECTR   \ %fe6\   \ %f", ((data_sub$Energy_ev[i]*0.001)+bin.size), (0)), fileConn1, append=TRUE)
   }else{
-    write(sprintf('myfile.write ("SPECTR   \ %fe6\   \ %f\\n")', ((data_sub$Energy_ev[i]*0.001)+bin.size), (-1)), fileConn1, append=TRUE)
+    #write(sprintf('myfile.write ("SPECTR   \ %fe6\   \ %f\\n")', ((data_sub$Energy_ev[i]*0.001)+bin.size), (-1)), fileConn1, append=TRUE)
+    write(sprintf("SPECTR   \ %fe6\   \ %f", ((data_sub$Energy_ev[i]*0.001)+bin.size), (-1)), fileConn1, append=TRUE)
   }
 }
 close(fileConn1)
