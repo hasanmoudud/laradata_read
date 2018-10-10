@@ -41,14 +41,11 @@ for(i in 1:nrow(data_sub)){
     bin_add = bin.size
   }
   }
-  #write(sprintf('myfile.write ("SPECTR   \ %fe6\   \ %f\\n")', (data_sub$Energy_ev[i]*0.001), (data_sub$Intensity_frac[i]/100)), fileConn1, append=TRUE)
-  write(sprintf("SPECTR   \ %fe6\   \ %f", (data_sub$Energy_ev[i]*0.001), (data_sub$Intensity_frac[i]/100)), fileConn1, append=TRUE)
+  write(sprintf('myfile.write ("SPECTR   \ %fe6\   \ %f\\n")', (data_sub$Energy_ev[i]*0.001), (data_sub$Intensity_frac[i]/100)), fileConn1, append=TRUE)
   if(i != nrow(data_sub)){
-    #write(sprintf('myfile.write ("SPECTR   \ %fe6\   \ %f\\n")', ((data_sub$Energy_ev[i]*0.001)+bin_add), (0)), fileConn1, append=TRUE)
-    write(sprintf("SPECTR   \ %fe6\   \ %f", ((data_sub$Energy_ev[i]*0.001)+bin_add), (0)), fileConn1, append=TRUE)
+    write(sprintf('myfile.write ("SPECTR   \ %fe6\   \ %f\\n")', ((data_sub$Energy_ev[i]*0.001)+bin_add), (0)), fileConn1, append=TRUE)
   }else{
-    #write(sprintf('myfile.write ("SPECTR   \ %fe6\   \ %f\\n")', ((data_sub$Energy_ev[i]*0.001)+bin_add), (-1)), fileConn1, append=TRUE)
-    write(sprintf("SPECTR   \ %fe6\   \ %f", ((data_sub$Energy_ev[i]*0.001)+bin_add), (-1)), fileConn1, append=TRUE)
+    write(sprintf('myfile.write ("SPECTR   \ %fe6\   \ %f\\n")', ((data_sub$Energy_ev[i]*0.001)+bin_add), (-1)), fileConn1, append=TRUE)
   }
 }
 close(fileConn1)
