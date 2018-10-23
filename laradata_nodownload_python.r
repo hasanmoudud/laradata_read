@@ -2,7 +2,7 @@ library(utils)
 #'''Read an lara text file and write an spectra file for PENELOPE''''
 
 ####..... Input data ....#####
-nuclide = "Ra-226D" # nucliede "symbol-massnumber-m/D(If needed)"
+nuclide = "Cs-137" # nucliede "symbol-massnumber-m/D(If needed)"
 threshhold_intensity = 0 # Minimum intensity in pwersent % (0.90%)
 bin.size <- 0.0001  # Bin size of spectra   0.0001= 100 eV
 
